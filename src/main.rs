@@ -18,7 +18,11 @@ fn get_data(target: String) {
     let data: Value = serde_json::from_str(&text_data)
         .expect("Error converting data");
 
-    let raw_size: u64 = data["size"].clone().as_u64().unwrap()*1000;
+    let raw_size: u64 = data["size"]
+        .clone()
+        .as_u64()
+        .unwrap() * 1000;
+
     let formated: String = format_size(raw_size, DECIMAL);
 
     println!("Size: {}", formated);
