@@ -11,7 +11,7 @@ fn get_data() {
         .text()
         .unwrap();
 
-    dbg!(data);
+    dbg!(raw_data);
 }
 
 fn main() {
