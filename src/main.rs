@@ -1,17 +1,20 @@
 use std::env;
 
+use serde_json::Value;
+
 fn get_data() {
     let url = "https://api.github.com/repos/denoland/deno".to_string();
     let client = reqwest::blocking::Client::new();
-    let raw_data: _ = client
+    let raw_data: String = client
         .get(url)
         .header("User-Agent", "getsize")
         .send()
         .unwrap()
         .text()
         .unwrap();
+    let data: Value = serde_json::from_str(&raw_data).unwrap();
 
-    dbg!(raw_data);
+    dbg!(data);
 }
 
 fn main() {
