@@ -2,8 +2,8 @@ use std::env;
 
 use serde_json::Value;
 
-fn get_data() {
-    let url = "https://api.github.com/repos/denoland/deno".to_string();
+fn get_data(target: String) {
+    let url = "https://api.github.com/repos/".to_string()+&target;
     let client = reqwest::blocking::Client::new();
     let raw_data: String = client
         .get(url)
@@ -19,7 +19,8 @@ fn get_data() {
 }
 
 fn main() {
-    let _args: Vec<String> = env::args().collect();
+    let args: Vec<String> = env::args().collect();
+    let target = &args[1];
 
-    get_data();
+    get_data(target.to_owned());
 }
