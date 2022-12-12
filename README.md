@@ -1,6 +1,6 @@
 # GitSize CLI Tool
 Get the size of a GitHub repository.
 
-## Commands
+# Command
 
- * `gitsize <user>/<repository>` Gets the size in Kbs of a repository.
+ * `gitsize <user>/<repository>` Gets the size of a repository.
