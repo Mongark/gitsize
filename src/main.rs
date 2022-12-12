@@ -13,8 +13,9 @@ fn get_data() {
         .text()
         .unwrap();
     let data: Value = serde_json::from_str(&raw_data).unwrap();
+    let size = &data["size"];
 
-    dbg!(data);
+    println!("Size: {}", &size);
 }
 
 fn main() {
