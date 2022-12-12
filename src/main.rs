@@ -1,15 +1,21 @@
 use std::env;
 
-fn get_metadata() {
+fn get_data() {
     let url = "https://api.github.com/repos/denoland/deno".to_string();
-
-    let data = reqwest::blocking::get(url).unwrap().text();
+    let client = reqwest::blocking::Client::new();
+    let data: _ = client
+        .get(url)
+        .header("User-Agent", "getsize")
+        .send()
+        .unwrap()
+        .text()
+        .unwrap();
 
     dbg!(data);
 }
 
 fn main() {
-    let args: Vec<String> = env::args().collect();
+    let _args: Vec<String> = env::args().collect();
 
-    get_metadata();
+    get_data();
 }
