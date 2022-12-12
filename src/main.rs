@@ -6,14 +6,16 @@ use humansize::{ format_size, DECIMAL };
 fn get_data(target: String) {
     let url = "https://api.github.com/repos/".to_string()+&target;
     let client = reqwest::blocking::Client::new();
-    let raw_data: String = client
+    let raw_data = client
         .get(url)
         .header("User-Agent", "getsize")
         .send()
-        .unwrap()
+        .expect("Failed to send message to GitHub API. Try again");
+
+    let text_data = raw_data
         .text()
         .unwrap();
-    let data: Value = serde_json::from_str(&raw_data).unwrap();
+    let data: Value = serde_json::from_str(&text_data).unwrap();
 
     let raw_size: u64 = data["size"].clone().as_u64().unwrap()*1000;
     let formated: String = format_size(raw_size, DECIMAL);
