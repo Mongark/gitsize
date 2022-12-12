@@ -30,6 +30,11 @@ fn get_size_from(target: String) {
 
 fn main() {
     let args: Vec<String> = env::args().collect();
+
+    if args.len() != 2 {
+        println!("\nGitSize - by Mongark\n   CLI tool to help you see the size of a git repository.\n   Commands:\n    gitsize <user>/<repository>\n");
+        return;
+    }
     let target = &args[1];
 
     get_size_from(target.to_owned());
