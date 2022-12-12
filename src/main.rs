@@ -1,6 +1,7 @@
 use std::env;
 
 use serde_json::Value;
+use humansize::{ format_size, DECIMAL };
 
 fn get_data(target: String) {
     let url = "https://api.github.com/repos/".to_string()+&target;
@@ -13,9 +14,11 @@ fn get_data(target: String) {
         .text()
         .unwrap();
     let data: Value = serde_json::from_str(&raw_data).unwrap();
-    let size = &data["size"];
 
-    println!("Size: {}", &size);
+    let raw_size: u64 = data["size"].clone().as_u64().unwrap();
+    let formated: String = format_size(raw_size, DECIMAL);
+
+    println!("Size: {}", formated);
 }
 
 fn main() {
