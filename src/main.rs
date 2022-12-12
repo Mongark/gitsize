@@ -15,7 +15,7 @@ fn get_data(target: String) {
         .unwrap();
     let data: Value = serde_json::from_str(&raw_data).unwrap();
 
-    let raw_size: u64 = data["size"].clone().as_u64().unwrap();
+    let raw_size: u64 = data["size"].clone().as_u64().unwrap()*1000;
     let formated: String = format_size(raw_size, DECIMAL);
 
     println!("Size: {}", formated);
