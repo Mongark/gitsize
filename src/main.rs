@@ -3,9 +3,10 @@ use std::env;
 use serde_json::Value;
 use humansize::{ format_size, DECIMAL };
 
-fn get_size_from(target: String) {
+fn get_size_from(target: String) -> String {
     let url = "https://api.github.com/repos/".to_string()+&target;
     let client = reqwest::blocking::Client::new();
+
     let raw_data = client
         .get(url)
         .header("User-Agent", "getsize")
@@ -15,6 +16,7 @@ fn get_size_from(target: String) {
     let text_data = raw_data
         .text()
         .unwrap();
+
     let data: Value = serde_json::from_str(&text_data)
         .expect("Error converting data");
 
@@ -26,6 +28,14 @@ fn get_size_from(target: String) {
     let formated: String = format_size(raw_size, DECIMAL);
 
     println!("Repository size: {}", formated);
+
+    formated
+}
+
+#[test]
+fn test_get_size_from() {
+    let data = get_size_from("Mongark/gitsize".to_owned());
+    assert_eq!(&data, "33 kB");
 }
 
 fn main() {
