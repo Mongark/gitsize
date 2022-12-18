@@ -1,4 +1,7 @@
 # GitSize CLI Tool
+
+![GitHub repo size](https://img.shields.io/github/repo-size/Mongark/gitsize)
+
 Get the size of a GitHub repository.
 
 # Command
