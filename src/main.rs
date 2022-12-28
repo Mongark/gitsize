@@ -1,5 +1,4 @@
-use std::env;
-
+use clap::Parser;
 use humansize::{format_size, DECIMAL};
 use serde_json::Value;
 
@@ -30,20 +29,13 @@ fn get_size_from(target: String) -> String {
     formated
 }
 
-#[test]
-fn test_get_size_from() {
-    let data = get_size_from("Mongark/gitsize".to_owned());
-    assert_eq!(&data, "33 kB");
+#[derive(Parser)]
+struct Commands {
+    repository: String,
 }
 
 fn main() {
-    let args: Vec<String> = env::args().collect();
+    let commands = Commands::parse();
 
-    if args.len() != 2 {
-        println!("\nGitSize - by Mongark\n   CLI tool to help you see the size of a git repository.\n   Commands:\n    gitsize <user>/<repository>\n");
-        return;
-    }
-    let target = &args[1];
-
-    get_size_from(target.to_owned());
+    get_size_from(commands.repository);
 }
