@@ -30,6 +30,7 @@ fn get_size_from(target: String) -> String {
 }
 
 #[derive(Parser)]
+#[command(about = "Tool for getting the size of GitHub repositories")]
 struct Commands {
     repository: String,
 }
