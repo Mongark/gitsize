@@ -1,7 +1,10 @@
+//! Main file
+
 use clap::Parser;
 use humansize::{format_size, DECIMAL};
 use serde_json::Value;
 
+/// Gets and parses metadata from the 'target' repository
 fn get_size_from(target: String) -> String {
     let url = "https://api.github.com/repos/".to_string() + &target;
     let client = reqwest::blocking::Client::new();
@@ -32,6 +35,7 @@ fn get_size_from(target: String) -> String {
 #[derive(Parser)]
 #[command(about = "Tool for getting the size of GitHub repositories")]
 struct Commands {
+    /// Repository name(in <author>/<repository> form)
     repository: String,
 }
 
